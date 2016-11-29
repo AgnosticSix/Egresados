@@ -1,0 +1,47 @@
+
+td {
+    font-family:verdana,arial;
+    font-size:8pt;
+}
+
+.estilotabla{
+    background-color:ffffff;
+    border-color:666666;
+
+}
+.estilocelda{
+    background-color:ddeeff;
+    color:333333;
+    font-weight:bold;
+    font-size:10pt;
+	margin:0px;
+}
+
+.estilocontenido{
+    background-color:#EAFCFF;
+    font-weight:bold;
+    font-size:14pt;
+	margin:0px;
+	font-style:bold;
+	text-align:center;
+}
+
+
+.estiloactividad{
+    background-color:#EAFCFF;
+    font-weight:bold;
+    font-size:10pt;
+	margin:0px;
+	font-style:bold;
+	text-align:right;
+}
+
+
+.estiloTaller{
+    background-color:#EAFCFF;
+    font-weight:bold;
+    font-size:10pt;
+	margin:0px;
+	font-style:bold;
+	text-align:left;
+}

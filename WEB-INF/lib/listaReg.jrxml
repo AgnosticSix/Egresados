@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lista" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="02e6b231-5bac-4437-84e4-1d2c3be1fc80">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="evento" class="java.lang.String"/>
+	<parameter name="clave" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM INSEVENTOS A, VDATLISTA B
+WHERE A.NUMREG=B.NUMREG AND A.EVENTO=$P{clave}
+AND A.NUMREG IN (SELECT D.NUMREG FROM REGISTRADOS D)]]>
+	</queryString>
+	<field name="EVENTO" class="java.lang.String"/>
+	<field name="NUMREG" class="java.lang.String"/>
+	<field name="TIPO" class="java.lang.String"/>
+	<field name="PARTICIPO" class="java.lang.String"/>
+	<field name="NOMBRE" class="java.lang.String"/>
+	<field name="INSTITUCION" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="104" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="572" height="79" uuid="73494ed6-0ac3-4a31-96b8-179b9ce06a96"/>
+				<imageExpression><![CDATA["F:\\SistemasWeb\\regJorVin\\Imagenes\\encabezado.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="79" width="572" height="25" uuid="5caf89e8-560a-42f4-ad39-d053280630ef"/>
+				<textElement textAlignment="Center">
+					<font fontName="Constantia" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{evento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="278" y="0" width="203" height="20" uuid="4f5c8f3e-25fc-4476-b98c-f0ac176ba5ec"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="115" height="20" uuid="f267439d-550e-42fd-a78b-337d3946b081"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="115" height="20" uuid="a301bb7e-a110-4267-a1b4-b1cbb252613f"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FOLIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="0" width="203" height="20" uuid="7adccbc3-f18b-4356-92ae-4080a2dcc4dc"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSTITUCION]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="115" y="0" width="163" height="20" uuid="de189ac4-d1c4-43b7-9921-2927dfbe39fe"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="115" y="0" width="163" height="20" uuid="ca36495f-3660-4607-84e5-1bea41a0ecff"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="481" y="0" width="91" height="20" uuid="d6dfd62d-b30c-4f33-8d64-66342a57a255"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="481" y="0" width="91" height="20" uuid="e8945d68-db69-4051-81c4-2714c9dc1ffc"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FIRMA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="45" splitType="Stretch">
+			<rectangle>
+				<reportElement x="278" y="0" width="203" height="45" uuid="627a494c-36d5-4cc6-bd9c-04425e4db206"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="115" height="45" uuid="cad83eae-fd88-4fa0-9aaf-5b4d0cdc73a9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="115" y="0" width="163" height="45" uuid="8c23d4c1-d0e8-4e29-936d-fd3332d405c4"/>
+			</rectangle>
+			<textField>
+				<reportElement x="3" y="1" width="110" height="44" uuid="dbc5bacb-8044-4052-9aad-7c7447985ab6"/>
+				<textFieldExpression><![CDATA[$F{NUMREG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="119" y="1" width="155" height="44" uuid="26f43463-e911-46df-aa29-9a25f056d3b4"/>
+				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Transparent" x="282" y="1" width="197" height="44" backcolor="#FFFFFF" uuid="2f3910af-357c-4072-8f18-1bab4d735975"/>
+				<textFieldExpression><![CDATA[$F{INSTITUCION}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="481" y="0" width="91" height="45" uuid="dc2721eb-374e-4c92-a1a3-72a687431a64"/>
+			</rectangle>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
