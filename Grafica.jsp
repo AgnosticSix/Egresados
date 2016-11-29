@@ -41,12 +41,11 @@ out.print("<select id='list' onchange='cambiaGrafica()'>");
 out.print("<option value='default'>&ndash; Elige una opción &ndash;</option>");
 
 while(rste.next()){
-	out.print("<option value='"+rste.getString("CATPID")+"'>"+rste.getString("PREGUNTA")+"</option>");		
+		out.print("<option value='"+rste.getString("CATPID")+"'>"+rste.getString("PREGUNTA")+"</option>");		
 }
 
 out.print("</select>");
 out.print("</div>");
-out.print("<br />");
 %>
 	<div id="container" style="width:100%; height:400px;"></div>
 	
@@ -59,14 +58,14 @@ function loadSeries(){
 	series = chart.series[0];
 	
 	<% 
-	rstq = objCon.ejecSQL("select OPCION from CATOPCIONES a where a.catpid='"+request.getParameter("idPregunta")+"'");
+	int i = 0;
+	rstq = objCon.ejecSQL("select * from CATOPCIONES a where a.CATPID='"+request.getParameter("idPregunta")+"'");
 	while(rstq.next()){
-		rstw = objCon.ejecSQL("SELECT count(*) as n FROM RESPUESTAS WHERE respuesta='"+rstq.getString("OPCION")+"'");
-		rstw.next();
+		rstw = objCon.ejecSQL("SELECT count(*) FROM RESPUESTAS b WHERE b.RESPUESTA='"+rstq.getString("OPCION")+"'");
 		%>
-		
-		chart.series[0].data[i].update(<%=rstw.getInt("n")%>);
+		chart.series[0].data[i].update(<%=rstw.getInt("b")%>);
 		<%
+		i++;
 	}
    
 	%>
@@ -122,91 +121,25 @@ $(function () {
                 }
             }
         },
-        
-        
         series: [{
             name: 'Brands',
-            data: [ 
-            <%
-                	ResultSet rstd = null;
-                	rstd = objCon.ejecSQL("select OPCION as op from CATOPCIONES a where a.catpid='"+request.getParameter("idPregunta")+"'");
-                		
-                	while(rstd.next())
+            data: [
+                { <%
+                	rstq.beforeFirst();
+                	while(rstq.next())
                 	{
-                		out.println("{ name: '"+rstd.getString("op")+"',");
-                		out.println("y:"+rstw.getInt("n")+"}, ");
+                		out.print("name: '"+rstq.getString("OPCION")+"'");
+                		out.print("y: '"+rstw.getInt("b")+"'");
                 	}
                 	%>
                 	
-                                
+                },                
             ]
         }]
-        
     });
-    
-    var chart = $('#container').highcharts(),
-    name = false,
-    enableDataLabels = true,
-    enableMarkers = true,
-    color = false;
-
-
-// Toggle names
-	$('#name').click(function () {
-    	chart.series[0].update({
-       		name: name ? null : 'First'
-    	});
-    	name = !name;
-	});
-
-// Toggle data labels
-	$('#data-labels').click(function () {
-    	chart.series[0].update({
-        	dataLabels: {
-            	enabled: enableDataLabels
-        	}
-    	});
-    	enableDataLabels = !enableDataLabels;
-	});
-
-// Toggle point markers
-	$('#markers').click(function () {
-    	chart.series[0].update({
-        	marker: {
-            	enabled: enableMarkers
-        	}
-    	});
-    	enableMarkers = !enableMarkers;
-	});
-
-// Toggle point markers
-	$('#color').click(function () {
-    	chart.series[0].update({
-        	color: color ? null : Highcharts.getOptions().colors[1]
-    	});
-    	color = !color;
-	});
-
-// Set type
-	$.each(['line', 'column', 'spline', 'area', 'areaspline', 'scatter', 'pie'], function (i, type) {
-    	$('#' + type).click(function () {
-        	chart.series[0].update({
-            	type: type
-        	});
-    	});
-	});
     loadSeries()});
 		</script>
 		<%objCon.cierraConex(); %>
 
-
-<br />
-<button id="column" style="margin-left: 2em">Column</button>
-<button id="line">Line</button>
-<button id="spline">Spline</button>
-<button id="area">Area</button>
-<button id="areaspline">Areaspline</button>
-<button id="scatter">Scatter</button>
-<button id="pie">Pie</button>
 </body>
 </html>
