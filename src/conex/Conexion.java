@@ -98,6 +98,19 @@ public class Conexion {
 		return rs;
 	 }
 	 
+	 public boolean ejecutar (String sql){
+		 Statement st = null;
+		 try{
+			 st = cn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+			 st.executeUpdate(sql);
+			 st.close();
+		 }catch(SQLException e){
+			 e.printStackTrace();
+		        return false;
+		 }
+		 return true;
+	 }
+	 
 	 public void cierraConex(){           		 
 	    	 try {
 	    		 if (cn!=null) {
