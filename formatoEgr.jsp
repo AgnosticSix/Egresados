@@ -86,56 +86,58 @@ function getRadioB(ctrl)
       <form  action="insertar.jsp" method="post" class="idealforms" >
 
         <div class="idealsteps-wrap">
-          <%for(int j=1;j<=5;j++){
-        	  out.print("<section class='idealsteps-step'>");
-          rst = objCon.ejecSQL("SELECT * FROM CATPREGUNTAS WHERE SECCION="+j );
-          
-          while(rst.next()){
-        if(rst.getInt("TIPO") == 1){
-      	  out.print("<div class='field' id='"+rst.getString("CATPID")+"'>");
-      	  out.print("<label class='main'>"+rst.getString("PREGUNTA")+"</label>");
-      	  out.print("<input name="+rst.getString("CATPID")+"r></input>");
-      	  out.print("</div>");
+<%for(int j=1;j<=5;j++){
+	out.print("<section class='idealsteps-step'>");
+	rst = objCon.ejecSQL("SELECT * FROM CATPREGUNTAS WHERE SECCION="+j );
+
+	while(rst.next()){
+    	if(rst.getInt("TIPO") == 1){
+      	  	out.print("<div class='field' id='"+rst.getString("CATPID")+"'>");
+      	  	out.print("<label class='main'>"+rst.getString("PREGUNTA")+"</label>");
+      	  	out.print("<input name="+rst.getString("CATPID")+"r></input>");
+      	  	out.print("</div>");
         }
         else if(rst.getInt("TIPO") == 2){
         	out.print("<div class='field' id='"+rst.getString("CATPID")+"'>");
-        	  out.print("<label class='main'>"+rst.getString("PREGUNTA")+"</label>");
-        	  out.print("<select name='"+rst.getString("CATPID")+"r' id='"+rst.getString("CATPID")+"r'>");
-        	  out.print("<option value='default'>&ndash; Elige una opción &ndash;</option>");
-        	  rste = objCon.ejecSQL("SELECT * FROM CATOPCIONES WHERE CATPID='"+rst.getString("CATPID")+"'");
-        	  while(rste.next()){
+       	  	out.print("<label class='main'>"+rst.getString("PREGUNTA")+"</label>");
+       	  	out.print("<select name='"+rst.getString("CATPID")+"r' id='"+rst.getString("CATPID")+"r'>");
+        	out.print("<option value='default'>&ndash; Elige una opción &ndash;</option>");
+        	rste = objCon.ejecSQL("SELECT * FROM CATOPCIONES WHERE CATPID='"+rst.getString("CATPID")+"'");
+        	
+        	while(rste.next()){
         		 
-        	  		out.print("<option value='"+rste.getString("OPCION")+"'>"+rste.getString("OPCION")+"</option>");
+        		out.print("<option value='"+rste.getString("OPCION")+"'>"+rste.getString("OPCION")+"</option>");
         	  		
-        	  }
-        	  out.print("</select>");
-        	  out.print("</div>");
+        	}
+        	  	out.print("</select>");
+        	  	out.print("</div>");
         }
         else if(rst.getInt("TIPO") == 3){
         	out.print("<div class='field' id='"+rst.getString("CATPID")+"'>");
-        	  out.print("<label class='main'>"+rst.getString("PREGUNTA")+"</label>");
-        	  out.print("<textarea name="+rst.getString("CATPID")+"r cols='30' rows='10'></textarea>");
-        	  out.print("</div>");
+        	out.print("<label class='main'>"+rst.getString("PREGUNTA")+"</label>");
+        	out.print("<textarea name="+rst.getString("CATPID")+"r cols='30' rows='10'></textarea>");
+        	out.print("</div>");
         }
         else{
         	out.print("<div class='field' id='"+rst.getString("CATPID")+"'>");
-      	  out.print("<h3>"+rst.getString("PREGUNTA")+"</h3>");
-      	  out.print("</div>");
+      	  	out.print("<h3>"+rst.getString("PREGUNTA")+"</h3>");
+      	  	out.print("</div>");
         }
-          }
-          out.print( "<div class='field buttons'>");
-          out.print("<label class='main'>&nbsp;</label>");
-       	  out.print(" <button type='button' class='next'>Next &raquo;</button>");
-       	  if(j == 5){
-       		out.print(" <button type='submit'  name='submit'>Listo</button>");
-       	  }
-          out.print(" </div>");
-          out.print(" </section>");
-          }
-          %>
-		
+	}
+    
+	out.print( "<div class='field buttons'>");
+    out.print("<label class='main'>&nbsp;</label>");
+    out.print(" <button type='button' class='next'>Next &raquo;</button>");
+    
+    if(j == 5){
+    	out.print(" <button type='submit'  name='submit'>Listo</button>");
+    }
           
-            
+    out.print(" </div>");
+    out.print(" </section>");
+}
+          %>
+                  
 <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function()
@@ -151,11 +153,7 @@ $(document).ready(function()
             	$('#5').hide();
             }
         });
-});
-</script> 
-<script type="text/javascript">
-$(document).ready(function()
-{
+
 	$('#7').hide();
 	$('#8').hide();
 	
@@ -171,11 +169,7 @@ $(document).ready(function()
         	$('#8').hide();
         }
     });
-});
-</script>
-<script type="text/javascript">
-$(document).ready(function()
-{
+
 	$('#11').hide();
 	$('#13').hide();
 	$('#10').hide();
@@ -197,11 +191,7 @@ $(document).ready(function()
         	$('#14').show();
         }
     });
-});
-</script>
-<script type="text/javascript">
-$(document).ready(function()
-{
+
 	$('#12').hide();
 	
      $("select[name=11r]").click(function () {  
@@ -214,11 +204,7 @@ $(document).ready(function()
         	$('#12').show();
         }
     });
-});
-</script> 
-<script type="text/javascript">
-$(document).ready(function()
-{
+
 	$('#16').hide();
 	$('#17').hide();
 	$('#20').hide();
@@ -279,11 +265,7 @@ $(document).ready(function()
         	$('#43').show();
         }
     });
-});
-</script>  
-<script type="text/javascript">
-$(document).ready(function()
-{
+
 	$('#18').hide();
 	$('#19').hide();
 	
@@ -299,11 +281,7 @@ $(document).ready(function()
         	$('#19').hide();
         }
     });
-});
-</script> 
-<script type="text/javascript">
-$(document).ready(function()
-{
+
 	$('#33').hide();
 	
      $("select[name=32r]").click(function () {  
@@ -316,12 +294,7 @@ $(document).ready(function()
         	$('#33').hide();
         }
     });
-});
-</script>      
-            
-<script type="text/javascript">
-$(document).ready(function()
-{
+
 	$('#38').hide();
 	$('#39').hide();
      $("select[name=37r]").click(function () {  
@@ -334,11 +307,7 @@ $(document).ready(function()
         	$('#39').hide();
         }
     });
-});
-</script>
-<script type="text/javascript">
-$(document).ready(function()
-{
+
 	$('#54').hide();
 	$('#55').hide();
      $("select[name=53r]").click(function () {  
@@ -354,7 +323,7 @@ $(document).ready(function()
 });
 </script>
 
-<%objCon.cierraConex(); %>
+
         </div>
 
         <span id="invalid"></span>
@@ -398,5 +367,6 @@ $(document).ready(function()
       $('form.idealforms').idealforms('nextStep');
     });
   </script>
+  <%objCon.cierraConex(); %>
 </body>
 </html>

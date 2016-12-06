@@ -23,7 +23,7 @@
 	<center>
 	<table width="100%" cellspacing="0">
     <tr><td><BR/></td></tr>
-	<TR><TD align="center"><img src="imagenes/login/logoUPC.png" ></TD></TR>
+	<TR><TD align="center"><img src="imagenes/login/logoUPC.gif" ></TD></TR>
 	<tr><td bgcolor="#C81A1A" align="center"><br/></td></tr>
 	<TR>
 	    <TD bgcolor="#787777">
