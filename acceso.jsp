@@ -28,7 +28,7 @@
 							HttpSession sesion=request.getSession();
 							sesion.setAttribute("user",request.getParameter("login"));
 							sesion.setAttribute("tipoBase",tipoBase);
-							response.sendRedirect("principal.jsp");
+							response.sendRedirect("indexPrincipal.jsp");
 			            	}
 			            	else{
 			            		HttpSession sesion=request.getSession();

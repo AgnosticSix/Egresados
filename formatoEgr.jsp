@@ -86,11 +86,55 @@ function getRadioB(ctrl)
       <form  action="insertar.jsp" method="post" class="idealforms" >
 
         <div class="idealsteps-wrap">
+        
 <%for(int j=1;j<=5;j++){
 	out.print("<section class='idealsteps-step'>");
-	rst = objCon.ejecSQL("SELECT * FROM CATPREGUNTAS WHERE SECCION="+j );
+	rst = objCon.ejecSQL("SELECT * FROM CATPREGUNTAS WHERE SECCION="+j);
+	
+	rst.next();
+	switch(rst.getInt("TIPO")){
+	
+	case '1': 
+			out.print("<div class='field' id='"+rst.getString("CATPID")+"'>");
+	  		out.print("<label class='main'>"+rst.getString("PREGUNTA")+"</label>");
+	  		out.print("<input name="+rst.getString("CATPID")+"r></input>");
+	  		out.print("</div>");
+	  		rst.next();
+	  		
+	  		
+	case '2':
+			out.print("<div class='field' id='"+rst.getString("CATPID")+"'>");
+   	  		out.print("<label class='main'>"+rst.getString("PREGUNTA")+"</label>");
+   	  		out.print("<select name='"+rst.getString("CATPID")+"r' id='"+rst.getString("CATPID")+"r'>");
+    		out.print("<option value='default'>&ndash; Elige una opción &ndash;</option>");
+    		rste = objCon.ejecSQL("SELECT * FROM CATOPCIONES WHERE CATPID='"+rst.getString("CATPID")+"'");
+    		while(rste.next()){
+   		 
+    			out.print("<option value='"+rste.getString("OPCION")+"'>"+rste.getString("OPCION")+"</option>");
+    	  		
+    		}
+    	  	out.print("</select>");
+    	  	out.print("</div>");
+    	  	rst.next();
+    	  	
+    	  	
+	case '3': 
+			out.print("<div class='field' id='"+rst.getString("CATPID")+"'>");
+			out.print("<label class='main'>"+rst.getString("PREGUNTA")+"</label>");
+			out.print("<textarea name="+rst.getString("CATPID")+"r cols='30' rows='10'></textarea>");
+			out.print("</div>");
+			rst.next();
+			
+			
+	default:
+			out.print("<div class='field' id='"+rst.getString("CATPID")+"'>");
+  	  		out.print("<h3>"+rst.getString("PREGUNTA")+"</h3>");
+  	  		out.print("</div>");
+  	  		rst.next();
+  	  		break;
+	}
 
-	while(rst.next()){
+	/*while(rst.next()){
     	if(rst.getInt("TIPO") == 1){
       	  	out.print("<div class='field' id='"+rst.getString("CATPID")+"'>");
       	  	out.print("<label class='main'>"+rst.getString("PREGUNTA")+"</label>");
@@ -123,7 +167,7 @@ function getRadioB(ctrl)
       	  	out.print("<h3>"+rst.getString("PREGUNTA")+"</h3>");
       	  	out.print("</div>");
         }
-	}
+	}*/
     
 	out.print( "<div class='field buttons'>");
     out.print("<label class='main'>&nbsp;</label>");
